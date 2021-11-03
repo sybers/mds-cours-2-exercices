@@ -1,0 +1,7 @@
+node_modules/
+
+exercice-2/users/*
+!exercice-2/users/.gitkeep
+
+exercice-3/users/*
+!exercice-3/users/.gitkeep

@@ -1,0 +1,15 @@
+{
+  "name": "mds-tp2-exercices",
+  "version": "1.0.0",
+  "description": "Exercices de programmation asynchrone en Node.js",
+  "scripts": {
+    "exercice-1": "node exercice-1/app.js",
+    "exercice-2": "node exercice-2/app.js",
+    "exercice-3": "node exercice-3/app.js"
+  },
+  "author": "Stanyslas Bres <stanyslas.bres@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.6"
+  }
+}
