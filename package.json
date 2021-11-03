@@ -5,7 +5,12 @@
   "scripts": {
     "exercice-1": "node exercice-1/app.js",
     "exercice-2": "node exercice-2/app.js",
-    "exercice-3": "node exercice-3/app.js"
+    "exercice-3": "node exercice-3/app.js",
+    "exercice-4": "node exercice-3/app.js",
+    "async:exercice-1": "node exercice-1/app-async.js",
+    "async:exercice-2": "node exercice-2/app-async.js",
+    "async:exercice-3": "node exercice-3/app-async.js",
+    "async:exercice-4": "node exercice-3/app-async.js"
   },
   "author": "Stanyslas Bres <stanyslas.bres@gmail.com>",
   "license": "MIT",
