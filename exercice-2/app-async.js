@@ -15,20 +15,29 @@ async function saveContactInfos(id, data) {
   return id;
 }
 
-async function main() {
-  const fileContents = await fs.readFile(
-    path.resolve(__dirname, "users.txt"),
-    "utf-8"
-  );
+async function readContactIdFromFile(fileName) {
+  const fileContents = await fs.readFile(fileName, "utf-8");
   const userId = parseInt(fileContents.trim(), 10);
 
   if (!Number.isInteger(userId)) {
     throw new Error(`Invalid user id: ${userId}`);
   }
 
-  const { id, data } = await fetchContactInfos(userId);
-  await saveContactInfos(id, data);
+  return userId;
+}
 
-  console.log(`Saved user infos data with id : ${userId}`);
+async function main() {
+  try {
+    const userId = await readContactIdFromFile(
+      path.resolve(__dirname, "users.txt")
+    );
+
+    const { id, data } = await fetchContactInfos(userId);
+    await saveContactInfos(id, data);
+
+    console.log(`Saved user infos data with id : ${userId}`);
+  } catch (err) {
+    console.error(err);
+  }
 }
 main();

@@ -14,16 +14,20 @@ function saveContactInfos(id, data) {
     .then(() => id);
 }
 
-fs.readFile(path.resolve(__dirname, "users.txt"), "utf-8")
-  .then((fileContents) => {
+function readContactIdFromFile(fileName) {
+  return fs.readFile(fileName, "utf-8").then((fileContents) => {
     const userId = parseInt(fileContents.trim(), 10);
 
     if (!Number.isInteger(userId)) {
       throw new Error(`Invalid user id: ${userId}`);
     }
 
-    return fetchContactInfos(userId).then(({ id, data }) =>
-      saveContactInfos(id, data)
-    );
-  })
-  .then((userId) => console.log(`Saved user infos data with id : ${userId}`));
+    return userId;
+  });
+}
+
+readContactIdFromFile(path.resolve(__dirname, "users.txt"))
+  .then((userId) => fetchContactInfos(userId))
+  .then(({ id, data }) => saveContactInfos(id, data))
+  .then((userId) => console.log(`Saved user infos data with id : ${userId}`))
+  .catch((err) => console.error(err));

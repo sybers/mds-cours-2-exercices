@@ -1,18 +1,21 @@
-const addAsync = (lhs, rhs) => {
+function addAsync(lhs, rhs) {
   return new Promise((resolve) => resolve(lhs + rhs));
-};
+}
 
-const subtractAsync = (lhs, rhs) => {
+function subtractAsync(lhs, rhs) {
   return new Promise((resolve) => resolve(lhs - rhs));
-};
+}
 
-const multiplyAsync = (lhs, rhs) => {
+function multiplyAsync(lhs, rhs) {
   return new Promise((resolve) => resolve(lhs * rhs));
-};
+}
 
-const divideAsync = (lhs, rhs) => {
-  return new Promise((resolve) => resolve(lhs / rhs));
-};
+function divideAsync(lhs, rhs) {
+  return new Promise((resolve, reject) => {
+    if (rhs === 0) reject(new Error("Attention division par zero"));
+    else resolve(lhs / rhs);
+  });
+}
 
 module.exports = {
   addAsync,

@@ -24,14 +24,26 @@ async function saveContactInfos(id, data) {
   return id;
 }
 
-async function main() {
-  const userIds = await readUserIdsFromFile(path.join(__dirname, "users.txt"));
+async function readContactIdsFromFile(fileName) {
+  const fileContents = await fs.readFile(fileName, "utf-8");
+  return fileContents
+    .split(",")
+    .map((id) => parseInt(id, 10))
+    .filter((id) => Number.isInteger(id));
+}
 
-  const ids = await Promise.all(
-    userIds.map((id) =>
-      fetchContactInfos(id).then(({ id, data }) => saveContactInfos(id, data))
-    )
+async function main() {
+  const userIds = await readContactIdsFromFile(
+    path.join(__dirname, "users.txt")
   );
+
+  const ids = [];
+  for (const userId of userIds) {
+    const { id, data } = await fetchContactInfos(userId);
+    await saveContactInfos(id, data);
+
+    ids.push(id);
+  }
 
   console.log(`Saved contact infos for ids : ${JSON.stringify(ids)}`);
 }

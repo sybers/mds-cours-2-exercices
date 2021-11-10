@@ -14,6 +14,18 @@ function saveContactInfos(id, data) {
     .then(() => id);
 }
 
+function readContactIdFromFile(fileName) {
+  return fs.readFile(fileName, "utf-8").then((fileContents) => {
+    const userId = parseInt(fileContents.trim(), 10);
+
+    if (!Number.isInteger(userId)) {
+      throw new Error(`Invalid user id: ${userId}`);
+    }
+
+    return userId;
+  });
+}
+
 fs.readFile("./users.txt", "utf-8")
   .then((fileContents) => {
     const contactIDS = fileContents
